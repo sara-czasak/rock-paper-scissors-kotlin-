@@ -1,52 +1,72 @@
 package com.example.rockpaperscissors
 
 fun main() {
-    var playerScore = 0
-    var computerScore = 0
-    var rounds = 0
 
-    println("Best out of 3 wins!\n")
+    var play = true
 
-    while(rounds < 3) {
-        var computerChoice = ""
-        var playerChoice = ""
+    while(play) {
+        var playerScore = 0
+        var computerScore = 0
+        var rounds = 0
+        println("Best out of 3 wins!\n")
+        while(rounds < 3) {
+            var computerChoice = ""
+            var playerChoice = ""
 
-        println("Rock, Paper or Scissors?\nEnter your choice: ")
-        playerChoice = readln()
+            println("Rock, Paper or Scissors?\nEnter your choice: ")
+            playerChoice = readln()
 
-        // Get random number
-        val randomNum = (1..3).random()
+            // Get random number
+            val randomNum = (1..3).random()
 
+            var winner = ""
 
-        if (randomNum == 1) {
-            computerChoice = "Rock"
-        } else if (randomNum == 2) {
-            computerChoice = "Paper"
-        } else {
-            computerChoice = "Scissors"
+            when(randomNum) {
+                1 -> {
+                    computerChoice = "Rock"
+                }
+                2 -> {
+                    computerChoice = "Paper"
+                }
+                3 -> {
+                    computerChoice = "Scissors"
+                }
+            }
+
+            println("Player Choice: $playerChoice\nComputer Choice: $computerChoice")
+
+            winner = when {
+                playerChoice == computerChoice -> "Tie"
+                playerChoice == "Rock" && computerChoice == "Scissors" -> "Player"
+                playerChoice == "Paper" && computerChoice == "Rock" -> "Player"
+                playerChoice == "Scissors" && computerChoice == "Paper" -> "Player"
+                else -> "Computer"
+            }
+
+            if(winner == "Player") {
+                playerScore++
+            } else if(winner == "Computer") {
+                computerScore++
+            }
+
+            rounds++
         }
 
-        println("Player Choice: $playerChoice\nComputer Choice: $computerChoice")
+        println("Player Score: $playerScore\nComputer Score: $computerScore")
 
-        if (playerChoice == computerChoice) {
-            println("It's a draw!")
-        } else if ((playerChoice == "Rock" && computerChoice == "Scissors") || (playerChoice == "Paper" && computerChoice == "Rock") || playerChoice == "Scissors" && computerChoice == "Paper") {
-            println("Player wins!")
-            playerScore++
-        } else {
-            println("Computer wins!")
-            computerScore++
+        var finalWinner = ""
+
+        when {
+            playerScore > computerScore -> println("Player Wins!")
+            computerScore > playerScore -> println("Computer Wins!")
+            else -> println("It's a draw")
         }
-        rounds++
-    }
 
-    println("Player Score: $playerScore\nComputer Score: $computerScore")
-
-    if(playerScore > computerScore) {
-        println("Player WINS")
-    } else if (computerScore > playerScore) {
-        println("Computer WINS")
-    } else {
-        println("It's a draw!")
+        println("Do you want to play again? y/n")
+        var input = readln()
+        play = when {
+            input == "y" -> true
+            else -> false
+        }
     }
 }
