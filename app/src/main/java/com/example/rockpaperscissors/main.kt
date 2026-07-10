@@ -13,9 +13,17 @@ fun main() {
             var computerChoice = ""
             var playerChoice = ""
 
-            println("Rock, Paper or Scissors?\nEnter your choice: ")
-            playerChoice = readln()
+            var choiceMade = false
 
+            while(!choiceMade) {
+                println("Rock, Paper or Scissors?\nEnter your choice: ")
+                playerChoice = readln()
+                if(playerChoice == "Rock" || playerChoice == "Paper" || playerChoice == "Scissors") {
+                    choiceMade = true
+                } else {
+                    println("Invalid choice, please try again")
+                }
+            }
             // Get random number
             val randomNum = (1..3).random()
 
