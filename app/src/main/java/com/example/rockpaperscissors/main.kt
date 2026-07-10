@@ -18,7 +18,7 @@ fun main() {
             while(!choiceMade) {
                 println("Rock, Paper or Scissors?\nEnter your choice: ")
                 playerChoice = readln()
-                if(playerChoice == "Rock" || playerChoice == "Paper" || playerChoice == "Scissors") {
+                if(playerChoice.lowercase() == "rock" || playerChoice.lowercase() == "paper" || playerChoice.lowercase() == "scissors") {
                     choiceMade = true
                 } else {
                     println("Invalid choice, please try again")
@@ -41,13 +41,13 @@ fun main() {
                 }
             }
 
-            println("Player Choice: $playerChoice\nComputer Choice: $computerChoice")
+            println("Player Choice: ${playerChoice.lowercase()}\nComputer Choice: ${computerChoice.lowercase()}")
 
             winner = when {
-                playerChoice == computerChoice -> "Tie"
-                playerChoice == "Rock" && computerChoice == "Scissors" -> "Player"
-                playerChoice == "Paper" && computerChoice == "Rock" -> "Player"
-                playerChoice == "Scissors" && computerChoice == "Paper" -> "Player"
+                playerChoice.lowercase() == computerChoice.lowercase() -> "Tie"
+                playerChoice.lowercase() == "rock" && computerChoice.lowercase() == "scissors" -> "Player"
+                playerChoice.lowercase() == "paper" && computerChoice.lowercase() == "rock" -> "Player"
+                playerChoice.lowercase() == "scissors" && computerChoice.lowercase() == "paper" -> "Player"
                 else -> "Computer"
             }
 
